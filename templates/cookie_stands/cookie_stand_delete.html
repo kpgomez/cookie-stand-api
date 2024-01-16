@@ -4,7 +4,7 @@
   <h1>Delete Cookie Stand</h1>
   <form method="POST">
   {% csrf_token %}
-    <p>Do you really want to delete "{{ cookie_stand.name }}"?</p>
+    <p>Do you really want to delete "{{ cookie_stand.location }}"?</p>
     <input type="submit" value="OK">
   </form>
 {% endblock content %}

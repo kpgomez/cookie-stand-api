@@ -25,7 +25,8 @@ class CookieStandUpdateView(LoginRequiredMixin, UpdateView):
 class CookieStandCreateView(LoginRequiredMixin, CreateView):
     template_name = "cookie_stands/cookie_stand_create.html"
     model = CookieStand
-    fields = ["name", "rating", "reviewer"] # "__all__" for all of them
+    fields = ["owner", "location", "description"] # "__all__" for all of them
+    success_url = reverse_lazy("cookie_stand_list") # new
 
 
 class CookieStandDeleteView(LoginRequiredMixin, DeleteView):

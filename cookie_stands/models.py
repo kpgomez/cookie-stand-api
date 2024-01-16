@@ -8,7 +8,7 @@ class CookieStand(models.Model):
         get_user_model(), on_delete=models.CASCADE, null=True, blank=True
     ) # changed from reviewer
     location = models.CharField(max_length=256) # changed from name
-    # rating = models.IntegerField(default=0, blank=True)
+    rating = models.IntegerField(default=0, blank=True)
     description = models.TextField(default="", null=True, blank=True)
     hourly_sales = models.JSONField(default=list, null=True)
     minimum_customers_per_hour = models.IntegerField(default=0)
