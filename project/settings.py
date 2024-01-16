@@ -10,9 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os # new
+import sys
 from datetime import timedelta
 from pathlib import Path
 import environ
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,9 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
     DEBUG=(bool, False),
     ENVIRONMENT=(str, "PRODUCTION"),
+    SECRET_KEY=(str, "SECRET_KEY"), # new
+
     ALLOW_ALL_ORIGINS=(bool, False),
     ALLOWED_HOSTS=(list, []),
     ALLOWED_ORIGINS=(list, []),
+
     DATABASE_ENGINE=(str, "django.db.backends.sqlite3"),
     DATABASE_NAME=(str, BASE_DIR / "db.sqlite3"),
     DATABASE_USER=(str, ""),
@@ -56,12 +62,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     # 3rd party
     "rest_framework",
     "corsheaders",
+
     # local
     "accounts",
-    "things",
+    "cookie_stands",
 ]
 
 MIDDLEWARE = [
@@ -171,7 +179,7 @@ SIMPLE_JWT = {
     ),  # lasts for 60 minutes
 }
 
-CORS_ORIGIN_WHITELIST = tuple(env.list("ALLOWED_ORIGINS"))
+CORS_ALLOWED_ORIGINS = tuple(env.list("ALLOWED_ORIGINS"))
 CORS_ALLOW_ALL_ORIGINS = env.bool("ALLOW_ALL_ORIGINS")
 
 # TAILWIND
@@ -182,3 +190,13 @@ STATICFILES_DIRS = [
 # AUTH
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
+
+# for local testing only
+if 'test' in sys.argv:
+    # reassign DATABASES setting if testing
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }

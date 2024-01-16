@@ -6681,7 +6681,7 @@ S2.define('select2/selection/stopPropagation',[
 
         // Adjust older deltas if necessary
         if ( shouldAdjustOldDeltas(orgEvent, absDelta) ) {
-            // Divide all the things by 40!
+            // Divide all the cookie_stands by 40!
             delta  /= 40;
             deltaX /= 40;
             deltaY /= 40;

@@ -9,7 +9,7 @@ load_dotenv(dotenv_path=dotenv_path)
 
 # NOTE: Adjust these settings as needed in project/.env
 API_HOST = os.getenv("TEST_API_HOST") or "http://localhost:8000"
-RESOURCE_URI = os.getenv("TEST_RESOURCE_URI") or "things"
+RESOURCE_URI = os.getenv("TEST_RESOURCE_URI") or "cookie_stands"
 USERNAME = os.getenv("TEST_USERNAME")
 PASSWORD = os.getenv("TEST_PASSWORD")
 
@@ -82,7 +82,7 @@ class ApiTester:
         return response.json()
 
     # TODO adjust parameter names to match API
-    def create(self, name, description, owner):
+    def create(self, location, description, owner):
         """creates a resource in api
 
         Usage:
@@ -101,7 +101,7 @@ class ApiTester:
         }
 
         data = {
-            "name": name,
+            "location": location,
             "description": description,
             "owner": int(owner),
         }
@@ -110,12 +110,12 @@ class ApiTester:
 
         return response.json()
 
-    def update(self, id, name=None, description=None, owner=None):
+    def update(self, id, location=None, description=None, owner=None):
         """updates a resource in api
 
         Usage:
         python api_tester.py update 1 /
-            --name=optional --description=optional --owner=optional
+            --location=optional --description=optional --owner=optional
 
         Returns: JSON
         """
@@ -131,7 +131,7 @@ class ApiTester:
         original = self.get_one(id)
 
         data = {
-            "name": name or original["name"],
+            "location": location or original["location"],
             "description": description or original["description"],
             "owner": owner or original["owner"],
         }
