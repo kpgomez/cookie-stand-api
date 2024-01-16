@@ -4,8 +4,8 @@ from .models import CookieStand
 
 class CookieStandAdmin(admin.ModelAdmin):
     list_display = (
-        "location",
         "owner",
+        "location",
         "description",
         "hourly_sales",
         "minimum_customers_per_hour",

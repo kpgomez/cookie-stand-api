@@ -22,3 +22,6 @@ services:  # Begins the definition of services. Services are containers that mak
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro  # Mounts a custom nginx configuration file from the host to the container in read-only mode.
     depends_on:
       - web  # Specifies that the nginx service depends on the web service. Docker Compose will start the web service first.
+
+volumes:
+    postgres_data:
