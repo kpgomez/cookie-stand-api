@@ -36,5 +36,4 @@ class CookieStand(models.Model):
 
             self.hourly_sales = cookies_each_hour
 
-
         super().save(*args, **kwargs)
